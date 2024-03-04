@@ -30,13 +30,13 @@ In the first task, you will explore how k-Means perform on datasets with diverse
 # the question asked.
 
 
-def fit_kmeans(dataset, n_clusters):
+def fit_kmeans(dataset, n_clusters, init):
     data, labels = dataset
     scaler = StandardScaler()
     scaler.fit(data)
     data = scaler.transform(data)
 
-    estimator = KMeans(init='random', random_state=42, n_clusters=n_clusters)
+    estimator = KMeans(init=init, random_state=42, n_clusters=n_clusters, n_init='auto')
     estimator.fit(data)
     return estimator.labels_
 
@@ -47,11 +47,11 @@ def compute():
     """
     A.	Load the following 5 datasets with 100 samples each: noisy_circles (nc), noisy_moons (nm), blobs with varied variances (bvv), Anisotropicly distributed data (add), blobs (b). Use the parameters from (https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html), with any random state. (with random_state = 42). Not setting the correct random_state will prevent me from checking your results.
     """
+    # All datasets from https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
     SAMPLES = 100
     SEED = 42
     FACTOR = 0.5
     NOISE = 0.05
-    # All datasets from https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
     nc_data, nc_labels = datasets.make_circles(n_samples=SAMPLES, factor=FACTOR, noise=NOISE, random_state=SEED)
     nm_data, nm_labels = datasets.make_moons(n_samples=SAMPLES, noise=NOISE, random_state=SEED)
     bvv_data, bvv_labels = datasets.make_blobs(n_samples=SAMPLES, cluster_std=[1.0, 2.5, 0.5], random_state=SEED)
@@ -86,13 +86,13 @@ def compute():
     """
 
     fig, axs = plt.subplots(nrows=4, ncols=5, figsize=(20, 16))
-    k = [2,3,5,10]
+    k = [2, 3, 5, 10]
     for i in range(len(k)):
-        nc_pred_labels = fit_kmeans((nc_data, nc_labels), n_clusters=k[i])
-        nm_pred_labels = fit_kmeans((nm_data, nm_labels), n_clusters=k[i])
-        bvv_pred_labels = fit_kmeans((bvv_data, bvv_labels), n_clusters=k[i])
-        add_pred_labels = fit_kmeans((add_data, add_labels), n_clusters=k[i])
-        b_pred_labels = fit_kmeans((b_data, b_labels), n_clusters=k[i])
+        nc_pred_labels = fit_kmeans((nc_data, nc_labels), n_clusters=k[i], init='random')
+        nm_pred_labels = fit_kmeans((nm_data, nm_labels), n_clusters=k[i], init='random')
+        bvv_pred_labels = fit_kmeans((bvv_data, bvv_labels), n_clusters=k[i], init='random')
+        add_pred_labels = fit_kmeans((add_data, add_labels), n_clusters=k[i], init='random')
+        b_pred_labels = fit_kmeans((b_data, b_labels), n_clusters=k[i], init='random')
 
         axs[i, 0].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels)
         axs[i, 1].scatter(nm_data[:, 0], nm_data[:, 1], c=nm_pred_labels)
@@ -118,7 +118,8 @@ def compute():
     # dct value: list of dataset abbreviations
     # Look at your plots, and return your answers.
     # The plot is part of your report, a pdf file name "report.pdf", in your repository.
-    dct = answers["1D: datasets sensitive to initialization"] = [""]
+
+    dct = answers["1D: datasets sensitive to initialization"] = ["nc", "nm", "bvv", "add", "b"]
 
     return answers
 
@@ -126,7 +127,6 @@ def compute():
 # ----------------------------------------------------------------------
 if __name__ == "__main__":
     answers = compute()
-    #print(answers['1A: datasets'])
 
     with open("part1.pkl", "wb") as f:
         pickle.dump(answers, f)

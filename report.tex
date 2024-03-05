@@ -1,7 +1,52 @@
 \documentclass{article}
+\usepackage[top=.5in, bottom=1in, left=0.75in, right=0.75in]{geometry}
+\usepackage{graphicx}
+
+\title{Data Mining Program Assignment 2 Report}
+\author{Hunter Garrison}
+\date{Due: March 21, 2024 @ 11:59PM}
 
 \begin{document}
 
-Hello!
+\maketitle  % This command generates the title, author, and date
+
+\section*{Q1. Evaluation of k-Means over Diverse Datasets}
+
+\subsection*{Part C}
+We start with showing the datasets and their respective true clustering.
+
+\includegraphics[width=\linewidth]{Images/Screenshot 2024-03-04 174741.png}
+
+Below is a 4 row by 5 column figure of scatter plots where each column pertains to a certain dataset and 
+each row pertains to the number of clusters specified in the K-Means algorithm (2, 3, 5, and 10 
+respectively).
+
+\includegraphics[width=\linewidth]{Images/Screenshot 2024-03-04 175109.png}
+
+We can see that the only dataset in which the K-Means clustering produced correct clusters was for the 
+blobs dataset (abbreviated "b" in the coding assignment) with denoted clusters of 3. All other datasets were 
+classified incorrectly after using K-Means.
+
+\subsection*{Part D}
+Below is a 5 row by 4 column figure where each row pertains to a certain dataset and each column denotes 
+specified initial centroids for 2 clusters, random initial centroids for 2 clusters, specified initial 
+centroids for 3 clusters, and initial random centroids for 3 clusters, respectively.
+
+\includegraphics[width=\linewidth]{Images/Screenshot 2024-03-04 175453.png}
+
+We can see that every single dataset is sensitive to the choice of initialization. For the noisy circles, 
+our clusters for k=2 start with the division between the clusters to be a diagonal line, but can be changed 
+to have the division between the clusters to be a line down the middle (centroids were initialized at 
+(0,0) and (1,0)). For the noisy moons, our clusters for k=2 include an extra point in the left cluster 
+when we initialize centroids as (0,0) and (1,0). For the blobs with varied variances, when we initialize 
+centroids at (0,0) and (1,0) we get the left two clusters merged together whereas random initialization 
+merged the left two clusters together. For the anisotropicly distributed data, upon initializing centroids 
+at (10,0), (0,0), and (0,0), we end up splitting the top left cluster into two sections. Finally, for the 
+blobs we can split the middle right cluster into two sections when initializing centroids at (0,0), (1,0), 
+and (2,0).
+
+\section*{Q2. Comparison of Clustering Evaluation Metrics}
+
 
 \end{document}
+

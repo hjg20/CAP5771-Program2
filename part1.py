@@ -85,7 +85,7 @@ def compute():
     Create a pdf of the plots and return in your report. 
     """
 
-    fig, axs = plt.subplots(nrows=4, ncols=5, figsize=(20, 16))
+    fig, axs = plt.subplots(nrows=4, ncols=5, figsize=(20, 14))
     k = [2, 3, 5, 10]
     for i in range(len(k)):
         nc_pred_labels = fit_kmeans((nc_data, nc_labels), n_clusters=k[i], init='random')
@@ -114,6 +114,57 @@ def compute():
 
     Create a pdf of the plots and return in your report. 
     """
+
+    fig, axs = plt.subplots(nrows=5, ncols=4, figsize=(20, 20))
+
+    nc_pred_labels = fit_kmeans((nc_data, nc_labels), n_clusters=2, init=[[0, 0], [1, 0]])
+    nm_pred_labels = fit_kmeans((nm_data, nm_labels), n_clusters=2, init=[[0, 0], [1, 0]])
+    bvv_pred_labels = fit_kmeans((bvv_data, bvv_labels), n_clusters=2, init=[[0, 0], [1, 0]])
+    add_pred_labels = fit_kmeans((add_data, add_labels), n_clusters=2, init=[[10, 0], [1, 0]])
+    b_pred_labels = fit_kmeans((b_data, b_labels), n_clusters=2, init=[[0, 0], [1, 0]])
+
+    nc_pred_labels2 = fit_kmeans((nc_data, nc_labels), n_clusters=2, init='random')
+    nm_pred_labels2 = fit_kmeans((nm_data, nm_labels), n_clusters=2, init='random')
+    bvv_pred_labels2 = fit_kmeans((bvv_data, bvv_labels), n_clusters=2, init='random')
+    add_pred_labels2 = fit_kmeans((add_data, add_labels), n_clusters=2, init='random')
+    b_pred_labels2 = fit_kmeans((b_data, b_labels), n_clusters=2, init='random')
+
+    nc_pred_labels3 = fit_kmeans((nc_data, nc_labels), n_clusters=3, init=[[0, 0], [1, 0], [2, 0]])
+    nm_pred_labels3 = fit_kmeans((nm_data, nm_labels), n_clusters=3, init=[[0, 0], [1, 0], [2, 0]])
+    bvv_pred_labels3 = fit_kmeans((bvv_data, bvv_labels), n_clusters=3, init=[[0, 0], [1, 0], [2, 0]])
+    add_pred_labels3 = fit_kmeans((add_data, add_labels), n_clusters=3, init=[[10, 0], [0, 0], [0, 0]])
+    b_pred_labels3 = fit_kmeans((b_data, b_labels), n_clusters=3, init=[[0, 0], [1, 0], [2, 0]])
+
+    nc_pred_labels4 = fit_kmeans((nc_data, nc_labels), n_clusters=3, init='random')
+    nm_pred_labels4 = fit_kmeans((nm_data, nm_labels), n_clusters=3, init='random')
+    bvv_pred_labels4 = fit_kmeans((bvv_data, bvv_labels), n_clusters=3, init='random')
+    add_pred_labels4 = fit_kmeans((add_data, add_labels), n_clusters=3, init='random')
+    b_pred_labels4 = fit_kmeans((b_data, b_labels), n_clusters=3, init='random')
+
+    axs[0, 0].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels)
+    axs[0, 1].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels2)
+    axs[0, 2].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels3)
+    axs[0, 3].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels4)
+
+    axs[1, 0].scatter(nm_data[:, 0], nm_data[:, 1], c=nm_pred_labels)
+    axs[1, 1].scatter(nm_data[:, 0], nm_data[:, 1], c=nm_pred_labels2)
+    axs[1, 2].scatter(nm_data[:, 0], nm_data[:, 1], c=nm_pred_labels3)
+    axs[1, 3].scatter(nm_data[:, 0], nm_data[:, 1], c=nm_pred_labels4)
+
+    axs[2, 0].scatter(bvv_data[:, 0], bvv_data[:, 1], c=bvv_pred_labels)
+    axs[2, 1].scatter(bvv_data[:, 0], bvv_data[:, 1], c=bvv_pred_labels2)
+    axs[2, 2].scatter(bvv_data[:, 0], bvv_data[:, 1], c=bvv_pred_labels3)
+    axs[2, 3].scatter(bvv_data[:, 0], bvv_data[:, 1], c=bvv_pred_labels4)
+
+    axs[3, 0].scatter(add_data[:, 0], add_data[:, 1], c=add_pred_labels)
+    axs[3, 1].scatter(add_data[:, 0], add_data[:, 1], c=add_pred_labels2)
+    axs[3, 2].scatter(add_data[:, 0], add_data[:, 1], c=add_pred_labels3)
+    axs[3, 3].scatter(add_data[:, 0], add_data[:, 1], c=add_pred_labels4)
+
+    axs[4, 0].scatter(b_data[:, 0], b_data[:, 1], c=b_pred_labels)
+    axs[4, 1].scatter(b_data[:, 0], b_data[:, 1], c=b_pred_labels2)
+    axs[4, 2].scatter(b_data[:, 0], b_data[:, 1], c=b_pred_labels3)
+    axs[4, 3].scatter(b_data[:, 0], b_data[:, 1], c=b_pred_labels4)
 
     # dct value: list of dataset abbreviations
     # Look at your plots, and return your answers.

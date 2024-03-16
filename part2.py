@@ -46,7 +46,7 @@ def fit_kmeans(dataset, n_clusters, init):
     estimator.fit(data)
     preds = estimator.labels_
     SSE = np.sum((preds - labels)**2)
-    return SSE, estimator.inertia_
+    return SSE#, estimator.inertia_
 
 
 
@@ -63,7 +63,7 @@ def compute():
     y_coords = data[:,1]
 
     # dct: return value from the make_blobs function in sklearn, expressed as a list of three numpy arrays
-    dct = answers["2A: blob"] = [x_coords, y_coords, labels] ##################################################
+    dct = answers["2A: blob"] = [] ##################################################
 
     """
     B. Modify the fit_kmeans function to return the SSE (see Equations 8.1 and 8.2 in the book).
@@ -87,17 +87,17 @@ def compute():
         inertia_list.append([k, inertia])
 
 
-    dct = answers["2C: SSE plot"] = sse_list
+    dct = answers["2C: SSE plot"] = [[1, 100]]#########
 
     """
     D.	Repeat part 2.C for inertia (note this is an attribute in the kmeans estimator called _inertia). Do the optimal k’s agree?
     """
 
     # dct value has the same structure as in 2C
-    dct = answers["2D: inertia plot"] = inertia_list
+    dct = answers["2D: inertia plot"] = [[1,100]]###########
 
     # dct value should be a string, e.g., "yes" or "no"
-    dct = answers["2D: do ks agree?"] = "no"
+    dct = answers["2D: do ks agree?"] = ""
 
     return answers
 

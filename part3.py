@@ -39,17 +39,20 @@ def compute():
     """
 
     # return value of scipy.io.loadmat()
-    answers["3A: toy data"] = io.loadmat('hierarchical_toy_data.mat')
+    mat_file = io.loadmat('hierarchical_toy_data.mat')
+    answers["3A: toy data"] = mat_file
 
     """
     B.	Create a linkage matrix Z, and plot a dendrogram using the scipy.hierarchy.linkage and scipy.hierachy.dendrogram functions, with “single” linkage.
     """
 
     # Answer: NDArray
-    answers["3B: linkage"] = np.zeros(1)
+    Z = linkage(mat_file['X'])
+    answers["3B: linkage"] = Z
 
     # Answer: the return value of the dendogram function, dicitonary
-    answers["3B: dendogram"] = {}
+    d = dendrogram(Z)
+    answers["3B: dendogram"] = d
 
     """
     C.	Consider the merger of the cluster corresponding to points with index sets {I={8,2,13}} J={1,9}}. At what iteration (starting from 0) were these clusters merged? That is, what row does the merger of A correspond to in the linkage matrix Z? The rows count from 0. 

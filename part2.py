@@ -63,7 +63,7 @@ def compute():
     y_coords = data[:,1]
 
     # dct: return value from the make_blobs function in sklearn, expressed as a list of three numpy arrays
-    dct = answers["2A: blob"] = [data, labels] ##################################################
+    dct = answers["2A: blob"] = [x_coords, y_coords, labels] ##################################################
 
     """
     B. Modify the fit_kmeans function to return the SSE (see Equations 8.1 and 8.2 in the book).
@@ -87,7 +87,7 @@ def compute():
         inertia_list.append([k, inertia])
 
 
-    dct = answers["2C: SSE plot"] = [sse_list]
+    dct = answers["2C: SSE plot"] = sse_list
 
     """
     D.	Repeat part 2.C for inertia (note this is an attribute in the kmeans estimator called _inertia). Do the optimal k’s agree?

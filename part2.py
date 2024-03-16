@@ -78,13 +78,14 @@ def compute():
 
     # dct value: a list of tuples, e.g., [[0, 100.], [1, 200.]]
     # Each tuple is a (k, SSE) pair
-    ks = [1,2,3,4,5,6,7,8]
-    sse_list = []
-    inertia_list = []
-    for k in ks:
-        SSE, inertia = fit_kmeans(dataset=dataset, n_clusters=k, init='random')
-        sse_list.append([k, SSE])
-        inertia_list.append([k, inertia])
+    
+    # ks = [1,2,3,4,5,6,7,8]
+    # sse_list = []
+    # inertia_list = []
+    # for k in ks:
+    #     SSE, inertia = fit_kmeans(dataset=dataset, n_clusters=k, init='random')
+    #     sse_list.append([k, SSE])
+    #     inertia_list.append([k, inertia])
 
 
     dct = answers["2C: SSE plot"] = [[1, 100]]#########

@@ -21,7 +21,7 @@ from scipy.cluster.hierarchy import dendrogram, linkage  #
 
 # import plotly.figure_factory as ff
 import math
-from sklearn.cluster import AgglomerativeClustering, KMeans
+from sklearn.cluster import AgglomerativeClustering
 import pickle
 import utils as u
 
@@ -36,17 +36,8 @@ In this task you will explore different methods to find a good value for k
 # Change the arguments and return according to 
 # the question asked. 
 
-def fit_kmeans(dataset, n_clusters, init):
-    data, labels = dataset
-    scaler = StandardScaler()
-    scaler.fit(data)
-    data = scaler.transform(data)
-
-    estimator = KMeans(init=init, random_state=42, n_clusters=n_clusters, n_init='auto')
-    estimator.fit(data)
-    preds = estimator.labels_
-    SSE = np.sum((preds - labels)**2)
-    return SSE#, estimator.inertia_
+def fit_kmeans():
+    return None
 
 
 
@@ -57,13 +48,9 @@ def compute():
     """
     A.	Call the make_blobs function with following parameters :(center_box=(-20,20), n_samples=20, centers=5, random_state=12).
     """
-    dataset = make_blobs(center_box=(-20,20), n_samples=20, centers=5, random_state=12)
-    data, labels = dataset
-    x_coords = data[:,0]
-    y_coords = data[:,1]
 
     # dct: return value from the make_blobs function in sklearn, expressed as a list of three numpy arrays
-    dct = answers["2A: blob"] = [] ##################################################
+    dct = answers["2A: blob"] = [np.zeros(0)]
 
     """
     B. Modify the fit_kmeans function to return the SSE (see Equations 8.1 and 8.2 in the book).
@@ -78,24 +65,14 @@ def compute():
 
     # dct value: a list of tuples, e.g., [[0, 100.], [1, 200.]]
     # Each tuple is a (k, SSE) pair
-    
-    # ks = [1,2,3,4,5,6,7,8]
-    # sse_list = []
-    # inertia_list = []
-    # for k in ks:
-    #     SSE, inertia = fit_kmeans(dataset=dataset, n_clusters=k, init='random')
-    #     sse_list.append([k, SSE])
-    #     inertia_list.append([k, inertia])
-
-
-    dct = answers["2C: SSE plot"] = [[1, 100]]#########
+    dct = answers["2C: SSE plot"] = [[0.0, 100.0]]
 
     """
     D.	Repeat part 2.C for inertia (note this is an attribute in the kmeans estimator called _inertia). Do the optimal k’s agree?
     """
 
     # dct value has the same structure as in 2C
-    dct = answers["2D: inertia plot"] = [[1,100]]###########
+    dct = answers["2D: inertia plot"] = [[0.0, 100.0]]
 
     # dct value should be a string, e.g., "yes" or "no"
     dct = answers["2D: do ks agree?"] = ""

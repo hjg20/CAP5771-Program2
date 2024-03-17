@@ -8,6 +8,7 @@ from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
 from itertools import cycle, islice
 import scipy.io as io
+from scipy.spatial.distance import euclidean
 from scipy.cluster.hierarchy import dendrogram, linkage  #
 
 # import plotly.figure_factory as ff
@@ -27,8 +28,11 @@ Recall from lecture that agglomerative hierarchical clustering is a greedy itera
 # the question asked.
 
 
-def data_index_function():
-    return None
+def data_index_function(data, cluster1, cluster2):
+    cluster_A = data[cluster1]
+    cluster_B = data[cluster2]
+    dissimilarity = np.min([euclidean(p, q) for p in cluster_A for q in cluster_B])
+    return dissimilarity
 
 
 def compute():
@@ -72,14 +76,14 @@ def compute():
     e.g., [[0,1,2],[3,4],[5],[6],…],  that were available when the two clusters in part 2.D were merged.
     """
     # List the clusters. the [[0,1,2], [3,4], [5], [6], ...] represents a list of lists.
-    answers["3E: clusters"] = [[0,0], [0,0]]
+    answers["3E: clusters"] = [[8,2,13], [1,9], [6,14], [4], [12], [7], [3], [10], [0], [11], [5]]
 
     """
     F.	Single linked clustering is often criticized as producing clusters where “the rich get richer”, that is, where one cluster is continuously merging with all available points. Does your dendrogram illustrate this phenomenon?
     """
 
     # Answer type: string. Insert your explanation as a string.
-    answers["3F: rich get richer"] = ""
+    answers["3F: rich get richer"] = "To an extent, yes. One cluster merges, and then 2 iterations later, a new cluster is formed from two unique points. However, after iteration 6, the main cluster merges with every other point continuously after that, thus illustrating the phenomenon."
 
     return answers
 

@@ -17,7 +17,7 @@ We start with showing the datasets and their respective true clustering.
 
 \includegraphics[width=\linewidth]{Images/Screenshot 2024-03-04 174741.png}
 
-Below is a 4 row by 5 column figure of scatter plots where each column pertains to a certain dataset and 
+Below is a 5 column by 4 row figure of scatter plots where each column pertains to a certain dataset and 
 each row pertains to the number of clusters specified in the K-Means algorithm (2, 3, 5, and 10 
 respectively).
 
@@ -47,6 +47,45 @@ and (2,0).
 
 \section*{Q2. Comparison of Clustering Evaluation Metrics}
 
+\subsection*{Part C}
+Below is a plot of SEE as a function of k for k=$1,2,\dots,8$:
+
+\includegraphics{Images/Screenshot 2024-03-17 164753.png}
+
+According to the elbow method, we want to choose k=4 as our optimal k value.
+
+\subsection*{Part D}
+Below is a plot of inertia as a function of k for k=$1,2,\dots,8$:
+
+\includegraphics{Images/Screenshot 2024-03-17 165102.png}
+
+Using the elbow method, it looks like k=2 should be our optimal k value, which does not agree with our 
+results from 2.C.
+
+\section*{Q3. Hierarchical Clustering}
+
+\subsection*{Part B}
+Below is a plot of the dendogram from the hierarchical toy dataset:
+
+\includegraphics{Images/Screenshot 2024-03-17 165911.png}
+
+\section*{Q4. Evaluation of Hierarchical Clustering over Diverse Datasets}
+
+\subsection*{Part B}
+Below is a 5 row by 4 column plot where each row pertains to a specfic dataset and each column pertains to single, 
+complete, ward, and centroid linkage type, respectively, using agglomerative clustering:
+
+\includegraphics{Images/Screenshot 2024-03-17 170543.png}
+The noisy circles and noisy moons datasets are now clustered correctly when using the single linkage type.
+
+\subsection*{Part C}
+Below is a 5 row by 4 column plot where each row pertains to a specfic dataset and each column pertains to single, 
+complete, ward, and centroid linkage type, respectively, using cgglomerative clustering with cut-off distance:
+
+\includegraphics{Images/Screenshot 2024-03-17 170849.png}
+
+We see that we can correctly identify the clusters with each dataset (with varying link types) except for the 
+"add" dataset.
 
 \end{document}
 

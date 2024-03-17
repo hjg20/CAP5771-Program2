@@ -26,8 +26,15 @@ In this task, you will explore hierarchical clustering over different datasets. 
 # Change the arguments and return according to 
 # the question asked. 
 
-def fit_hierarchical_cluster():
-    return None
+def fit_hierarchical_cluster(dataset, linkage_type, n_clusters):
+    data, labels = dataset
+    scaler = StandardScaler()
+    scaler.fit(data)
+    data = scaler.transform(data)
+
+    estimator = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage_type)
+    estimator.fit(data)
+    return estimator.labels_
 
 def fit_modified():
     return None
@@ -39,10 +46,29 @@ def compute():
     """
     A.	Repeat parts 1.A and 1.B with hierarchical clustering. That is, write a function called fit_hierarchical_cluster (or something similar) that takes the dataset, the linkage type and the number of clusters, that trains an AgglomerativeClustering sklearn estimator and returns the label predictions. Apply the same standardization as in part 1.B. Use the default distance metric (euclidean) and the default linkage (ward).
     """
+    SAMPLES = 100
+    SEED = 42
+    FACTOR = 0.5
+    NOISE = 0.05
+    nc_data, nc_labels = datasets.make_circles(n_samples=SAMPLES, factor=FACTOR, noise=NOISE, random_state=SEED)
+    nm_data, nm_labels = datasets.make_moons(n_samples=SAMPLES, noise=NOISE, random_state=SEED)
+    bvv_data, bvv_labels = datasets.make_blobs(n_samples=SAMPLES, cluster_std=[1.0, 2.5, 0.5], random_state=SEED)
+    X, y = datasets.make_blobs(n_samples=SAMPLES, random_state=SEED)
+    transformation = [[0.6, -0.6], [-0.4, 0.8]]
+    X_aniso = np.dot(X, transformation)
+    add_data, add_labels = (X_aniso, y)
+    b_data, b_labels = datasets.make_blobs(n_samples=SAMPLES, random_state=SEED)
+
+    # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
+    # 'nc', 'nm', 'bvv', 'add', 'b'. keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
 
     # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
     # keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
-    dct = answers["4A: datasets"] = {}
+    dct = answers["4A: datasets"] = {"nc": [nc_data, nc_labels],
+        "nm": [nm_data, nm_labels],
+        "bvv": [bvv_data, bvv_labels],
+        "add": [add_data, add_labels],
+        "b": [b_data, b_labels]}
 
     # dct value:  the `fit_hierarchical_cluster` function
     dct = answers["4A: fit_hierarchical_cluster"] = fit_hierarchical_cluster
@@ -54,6 +80,8 @@ def compute():
     """
 
     # dct value: list of dataset abbreviations (see 1.C)
+    linkage_types = ['single', 'complete', ward, centroid]
+
     dct = answers["4B: cluster successes"] = [""]
 
     """
@@ -63,7 +91,7 @@ def compute():
     """
 
     # dct is the function described above in 4.C
-    dct = answers["4A: modified function"] = fit_modified
+    dct = answers["4C: modified function"] = fit_modified
 
     return answers
 

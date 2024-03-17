@@ -64,7 +64,8 @@ def compute():
 
     # Dictionary of 5 datasets. e.g., dct["nc"] = [data, labels]
     # keys: 'nc', 'nm', 'bvv', 'add', 'b' (abbreviated datasets)
-    dct = answers["4A: datasets"] = {"nc": [nc_data, nc_labels],
+    dct = answers["4A: datasets"] = {
+        "nc": [nc_data, nc_labels],
         "nm": [nm_data, nm_labels],
         "bvv": [bvv_data, bvv_labels],
         "add": [add_data, add_labels],
@@ -80,7 +81,7 @@ def compute():
     """
 
     # dct value: list of dataset abbreviations (see 1.C)
-    linkage_types = ['single', 'complete', ward, centroid]
+    linkage_types = ['single', 'complete', 'ward', 'centroid']
 
     dct = answers["4B: cluster successes"] = [""]
 

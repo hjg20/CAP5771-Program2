@@ -32,9 +32,11 @@ def fit_hierarchical_cluster(dataset, linkage_type, n_clusters):
     scaler.fit(data)
     data = scaler.transform(data)
 
-    estimator = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage_type)
-    estimator.fit(data)
-    return estimator.labels_
+    Z = linkage(data, method=linkage_type)
+
+    labels = fcluster(Z, t=n_clusters, criterion='maxclust')
+
+    return labels
 
 def fit_modified(dataset, linkage_type):
     data, labels = dataset
@@ -114,11 +116,11 @@ def compute():
     add_pred_labels3 = fit_hierarchical_cluster((add_data, add_labels), n_clusters=2, linkage_type='ward')
     b_pred_labels3 = fit_hierarchical_cluster((b_data, b_labels), n_clusters=2, linkage_type='ward')
 
-    nc_pred_labels4 = fit_hierarchical_cluster((nc_data, nc_labels), n_clusters=2, linkage_type='average')
-    nm_pred_labels4 = fit_hierarchical_cluster((nm_data, nm_labels), n_clusters=2, linkage_type='average')
-    bvv_pred_labels4 = fit_hierarchical_cluster((bvv_data, bvv_labels), n_clusters=2, linkage_type='average')
-    add_pred_labels4 = fit_hierarchical_cluster((add_data, add_labels), n_clusters=2, linkage_type='average')
-    b_pred_labels4 = fit_hierarchical_cluster((b_data, b_labels), n_clusters=2, linkage_type='average')
+    nc_pred_labels4 = fit_hierarchical_cluster((nc_data, nc_labels), n_clusters=2, linkage_type='centroid')
+    nm_pred_labels4 = fit_hierarchical_cluster((nm_data, nm_labels), n_clusters=2, linkage_type='centroid')
+    bvv_pred_labels4 = fit_hierarchical_cluster((bvv_data, bvv_labels), n_clusters=2, linkage_type='centroid')
+    add_pred_labels4 = fit_hierarchical_cluster((add_data, add_labels), n_clusters=2, linkage_type='centroid')
+    b_pred_labels4 = fit_hierarchical_cluster((b_data, b_labels), n_clusters=2, linkage_type='centroid')
 
     axs[0, 0].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels)
     axs[0, 1].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels2)
@@ -173,11 +175,11 @@ def compute():
     add_pred_labels3 = fit_modified((add_data, add_labels), linkage_type='ward')
     b_pred_labels3 = fit_modified((b_data, b_labels), linkage_type='ward')
 
-    nc_pred_labels4 = fit_modified((nc_data, nc_labels), linkage_type='average')
-    nm_pred_labels4 = fit_modified((nm_data, nm_labels), linkage_type='average')
-    bvv_pred_labels4 = fit_modified((bvv_data, bvv_labels), linkage_type='average')
-    add_pred_labels4 = fit_modified((add_data, add_labels), linkage_type='average')
-    b_pred_labels4 = fit_modified((b_data, b_labels), linkage_type='average')
+    nc_pred_labels4 = fit_modified((nc_data, nc_labels), linkage_type='centroid')
+    nm_pred_labels4 = fit_modified((nm_data, nm_labels), linkage_type='centroid')
+    bvv_pred_labels4 = fit_modified((bvv_data, bvv_labels), linkage_type='centroid')
+    add_pred_labels4 = fit_modified((add_data, add_labels), linkage_type='centroid')
+    b_pred_labels4 = fit_modified((b_data, b_labels), linkage_type='centroid')
 
     axs[0, 0].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels)
     axs[0, 1].scatter(nc_data[:, 0], nc_data[:, 1], c=nc_pred_labels2)
